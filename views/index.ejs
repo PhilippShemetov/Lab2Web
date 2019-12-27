@@ -1,0 +1,91 @@
+<% include partials/_header %>
+
+<div class="container">
+
+  <div class="row">
+    <!--FORM-->
+    <div class="col-md-5">
+      <div class="">
+        <div class="card-body">
+          <form action="/add" method="post">
+            <div class="form-group">
+              <input class="form-control" type="text" name="title" placeholder="Заголовок">
+            </div>
+            <div class="form-group">
+              <textarea class="form-control" name="description" cols="80"
+                placeholder="Добавить запись"
+                ></textarea>
+            </div>
+            <div class="form-group">
+              <input class="form-control" type="text" name="marks" placeholder="Метка">
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <div class="custom-file">
+                  <input type="file" name="file" id="file1"
+                         class="custom-file-input" onchange="readSingleFile(this.files)" >
+                  <label class="custom-file-label" for="file1" id="file-label">Choose
+                    file</label>
+                </div>
+              </div>
+            </div>
+            <button class="btn btn-primary" type="submit">
+              Добавить
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="container-fluid">
+      <h1 align="center">Записи</h1>
+
+
+    <!-- LIST -->
+
+    <div class="">
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>N°</th>
+            <th>Загаловок</th>
+            <th>Запись</th>
+            <th>Метка</th>
+            <th>Файл</th>
+            <th>Операции</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(var i=0; i < tasks.length; i++) { %>
+            <tr>
+              <td><%= i + 1%></td>
+              <td><strong><%= tasks[i].title %></strong></td>
+              <td><%= tasks[i].description %></td>
+              <td><%= tasks[i].marks %></td>
+              <td></td>
+              <td>
+                <a
+                  class="<%= tasks[i].status ? 'btn btn-success' : 'btn btn-dark'%>"
+                  href="/turn/<%= tasks[i]._id %>">Done</a>
+                <a href="/delete/<%= tasks[i]._id %>"
+                  class="btn btn-danger">
+                  Удалить
+                </a>
+                <a href="/edit/<%= tasks[i]._id %>" class="btn btn-info">
+                  Редактировать
+                </a>
+                <a href="#" class="btn color-green btn-success">
+                  Скачать файл
+                </a>
+              </td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+
+</div>
+
